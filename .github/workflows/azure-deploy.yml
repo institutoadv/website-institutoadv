@@ -21,8 +21,8 @@ jobs:
                   azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
                   repo_token: ${{ secrets.GITHUB_TOKEN }}
                   action: "upload"
-                  ###### Configuração de Pastas ######
-                  app_location: "/frontend" # Onde está o React
-                  api_location: "/api" # Onde está o Node.js
-                  output_location: "dist" # Pasta de build (ou 'build' se for CRA)
-                  ###### Fim da Configuração ######
+                  ###### AJUSTE AQUI ######
+                  app_location: "/" # Se o package.json do React estiver na raiz
+                  api_location: "api" # Pasta onde está o seu Node.js
+                  output_location: "dist" # Ou 'build' se estiver usando Create React App
+                  #########################
