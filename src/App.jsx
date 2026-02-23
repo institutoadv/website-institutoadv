@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Heart, BookOpen, Monitor, Baby, Menu, X, Mail, Phone, MapPin, 
-  ChevronRight, Github, Instagram, Facebook, Copy, Check, QrCode, 
-  Users, Target, Smile, Laptop, GraduationCap, Sparkles, Calendar, 
-  Clock, ArrowLeft, Camera, HandHeart, ExternalLink, Send, 
+import {
+  Heart, BookOpen, Monitor, Baby, Menu, X, Mail, Phone, MapPin,
+  ChevronRight, Github, Instagram, Facebook, Copy, Check, QrCode,
+  Users, Target, Smile, Laptop, GraduationCap, Sparkles, Calendar,
+  Clock, ArrowLeft, Camera, HandHeart, ExternalLink, Send,
   UserCircle, ClipboardList, Trash2, Search, Filter, ShieldCheck,
   MapPinned, GraduationCap as SchoolIcon, FileText, Info,
   BarChart3, Download, Eye, CheckCircle2, AlertCircle, MessageSquare, List,
@@ -16,13 +16,13 @@ const MONTHS = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Jul
 const PIX_KEY = "00.000.000/0001-00";
 
 const App = () => {
-  const [currentView, setCurrentView] = useState('home'); 
+  const [currentView, setCurrentView] = useState('home');
   const [selectedCourseId, setSelectedCourseId] = useState('informatica');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [registrations, setRegistrations] = useState([]);
-  const [messages, setMessages] = useState([]); 
+  const [messages, setMessages] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
@@ -30,7 +30,7 @@ const App = () => {
   const [filterCourse, setFilterCourse] = useState('Todos');
   const [filterTurma, setFilterTurma] = useState('Todos');
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const [dashboardTab, setDashboardTab] = useState('alunos'); 
+  const [dashboardTab, setDashboardTab] = useState('alunos');
   const [selectedCertificate, setSelectedCertificate] = useState(null);
 
   // --- DADOS ESTÁTICOS ---
@@ -55,9 +55,18 @@ const App = () => {
   useEffect(() => {
     // Monitora a URL secreta
     const path = window.location.pathname;
+
+    // Log para debug (aparecerá no F12 do navegador)
+    console.log("Caminho detectado:", path);
     if (path === '/admin-portal-adv') {
       setCurrentView('dashboard');
+    } else {
+      // Garante que se não for a URL secreta, ele caia na home
+      setCurrentView('home');
     }
+  }, []);
+
+  useEffect(() => {
 
     const loadFromSQL = async () => {
       try {
@@ -127,17 +136,17 @@ const App = () => {
       setStatus('sending');
       setTimeout(() => setStatus('success'), 1200);
     };
-    if (status === 'success') return <div className="py-12 text-center"><Check size={40} className="mx-auto text-green-500 mb-4"/><h3>Enviado!</h3></div>;
+    if (status === 'success') return <div className="py-12 text-center"><Check size={40} className="mx-auto text-green-500 mb-4" /><h3>Enviado!</h3></div>;
     return (
       <form onSubmit={handleSend} className="space-y-5">
-        <input required value={contactData.name} onChange={e => setContactData({...contactData, name: e.target.value})} placeholder="Seu Nome" className="w-full px-6 py-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-orange-500 transition-all"/>
+        <input required value={contactData.name} onChange={e => setContactData({ ...contactData, name: e.target.value })} placeholder="Seu Nome" className="w-full px-6 py-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-orange-500 transition-all" />
         <div className="grid md:grid-cols-2 gap-5">
-          <input required type="email" value={contactData.email} onChange={e => setContactData({...contactData, email: e.target.value})} placeholder="E-mail" className="w-full px-6 py-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-orange-500 transition-all"/>
-          <select value={contactData.subject} onChange={e => setContactData({...contactData, subject: e.target.value})} className="w-full px-6 py-4 bg-slate-50 rounded-2xl outline-none font-bold border border-transparent focus:border-orange-500 transition-all cursor-pointer">
+          <input required type="email" value={contactData.email} onChange={e => setContactData({ ...contactData, email: e.target.value })} placeholder="E-mail" className="w-full px-6 py-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-orange-500 transition-all" />
+          <select value={contactData.subject} onChange={e => setContactData({ ...contactData, subject: e.target.value })} className="w-full px-6 py-4 bg-slate-50 rounded-2xl outline-none font-bold border border-transparent focus:border-orange-500 transition-all cursor-pointer">
             <option value="Contato">Contato Geral</option><option value="Voluntário">Ser Voluntário</option>
           </select>
         </div>
-        <textarea required value={contactData.message} onChange={e => setContactData({...contactData, message: e.target.value})} placeholder="Como podemos ajudar?" className="w-full px-6 py-4 bg-slate-50 rounded-2xl outline-none focus:border-orange-500 resize-none" rows="4"/>
+        <textarea required value={contactData.message} onChange={e => setContactData({ ...contactData, message: e.target.value })} placeholder="Como podemos ajudar?" className="w-full px-6 py-4 bg-slate-50 rounded-2xl outline-none focus:border-orange-500 resize-none" rows="4" />
         <button type="submit" className="w-full py-5 bg-orange-500 text-white font-black rounded-2xl shadow-lg uppercase">Enviar Mensagem</button>
       </form>
     );
@@ -185,32 +194,32 @@ const App = () => {
     return (
       <div className="pt-32 pb-20 px-4 bg-slate-50 min-h-screen">
         <div className="max-w-5xl mx-auto">
-          <button onClick={() => navigateTo('home')} className="flex items-center gap-2 mb-8 text-slate-500 font-bold uppercase text-[10px] tracking-widest"><ArrowLeft size={16}/> Voltar</button>
+          <button onClick={() => navigateTo('home')} className="flex items-center gap-2 mb-8 text-slate-500 font-bold uppercase text-[10px] tracking-widest"><ArrowLeft size={16} /> Voltar</button>
           <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100">
             <div className="bg-slate-900 p-10 text-white relative"><h2 className="text-4xl font-black italic mb-2 tracking-tight">Formulário de <span className="text-orange-500">Matrícula</span></h2></div>
             <form onSubmit={handleSubmit} className="p-8 lg:p-12 space-y-10">
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="md:col-span-2 space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Nome Completo</label><input required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Nascimento</label><input required type="date" value={formData.birthDate} onChange={e => setFormData({...formData, birthDate: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Escolaridade</label><select value={formData.escolaridade} onChange={e => setFormData({...formData, escolaridade: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner"><option>Fundamental</option><option>Médio</option><option>Superior</option></select></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">CPF</label><input required value={formData.cpf} onChange={e => setFormData({...formData, cpf: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">RG</label><input required value={formData.rg} onChange={e => setFormData({...formData, rg: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">E-mail</label><input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">WhatsApp</label><input required type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="md:col-span-2 space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Nome Completo</label><input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Nascimento</label><input required type="date" value={formData.birthDate} onChange={e => setFormData({ ...formData, birthDate: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Escolaridade</label><select value={formData.escolaridade} onChange={e => setFormData({ ...formData, escolaridade: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner"><option>Fundamental</option><option>Médio</option><option>Superior</option></select></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">CPF</label><input required value={formData.cpf} onChange={e => setFormData({ ...formData, cpf: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">RG</label><input required value={formData.rg} onChange={e => setFormData({ ...formData, rg: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">E-mail</label><input required type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">WhatsApp</label><input required type="tel" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
               </div>
               <div className="grid md:grid-cols-4 lg:grid-cols-6 gap-6">
-                <div className="md:col-span-2 lg:col-span-3 space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Logradouro</label><input required value={formData.logradouro} onChange={e => setFormData({...formData, logradouro: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Nº</label><input required value={formData.numero} onChange={e => setFormData({...formData, numero: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Bairro</label><input required value={formData.bairro} onChange={e => setFormData({...formData, bairro: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">CEP</label><input required value={formData.cep} onChange={e => setFormData({...formData, cep: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="md:col-span-2 lg:col-span-3 space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Logradouro</label><input required value={formData.logradouro} onChange={e => setFormData({ ...formData, logradouro: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Nº</label><input required value={formData.numero} onChange={e => setFormData({ ...formData, numero: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Bairro</label><input required value={formData.bairro} onChange={e => setFormData({ ...formData, bairro: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">CEP</label><input required value={formData.cep} onChange={e => setFormData({ ...formData, cep: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner" /></div>
               </div>
               <div className="grid md:grid-cols-3 gap-6">
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Projeto</label><select value={formData.course} onChange={e => setFormData({...formData, course: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner"><option value="informatica">Informática</option><option value="eja">EJA</option><option value="infantil">Infantil</option></select></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Turma</label><select value={formData.turma} onChange={e => setFormData({...formData, turma: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner">{MONTHS.map(m => <option key={m} value={m}>{m}</option>)}</select></div>
-                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Horário</label><select value={formData.time} onChange={e => setFormData({...formData, time: e.target.value})} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner">{TIME_SLOTS.map(t => <option key={t} value={t}>{t}h</option>)}</select></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Projeto</label><select value={formData.course} onChange={e => setFormData({ ...formData, course: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner"><option value="informatica">Informática</option><option value="eja">EJA</option><option value="infantil">Infantil</option></select></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Turma</label><select value={formData.turma} onChange={e => setFormData({ ...formData, turma: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner">{MONTHS.map(m => <option key={m} value={m}>{m}</option>)}</select></div>
+                <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400">Horário</label><select value={formData.time} onChange={e => setFormData({ ...formData, time: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold outline-none shadow-inner">{TIME_SLOTS.map(t => <option key={t} value={t}>{t}h</option>)}</select></div>
               </div>
               <div className="p-6 bg-slate-900 rounded-3xl text-white flex items-start gap-4 shadow-xl">
-                <input required type="checkbox" checked={formData.lgpdConsent} onChange={e => setFormData({...formData, lgpdConsent: e.target.checked})} className="mt-1 w-6 h-6 cursor-pointer" />
+                <input required type="checkbox" checked={formData.lgpdConsent} onChange={e => setFormData({ ...formData, lgpdConsent: e.target.checked })} className="mt-1 w-6 h-6 cursor-pointer" />
                 <p className="text-xs text-slate-400 italic">Concordo com os termos da LGPD no **Instituto Alegria de Viver**.</p>
               </div>
               <button disabled={status === 'sending'} className="w-full py-6 bg-orange-500 text-white font-black rounded-3xl shadow-xl uppercase italic text-lg hover:bg-orange-600 transition-all">{status === 'sending' ? 'Enviando para Nuvem...' : 'Finalizar Matrícula'}</button>
@@ -232,14 +241,14 @@ const App = () => {
             <h1 className="text-4xl font-black italic tracking-tighter text-slate-800">Gestão <span className="text-blue-600">Administrativa</span></h1>
             <div className="flex gap-4">
               <button className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-md">Exportar Excel</button>
-              <button onClick={handleLogout} className="p-3 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all"><X size={20}/></button>
+              <button onClick={handleLogout} className="p-3 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all"><X size={20} /></button>
             </div>
           </div>
-          
+
           <div className="bg-white p-6 rounded-[3rem] shadow-sm border border-slate-100 mb-8 flex gap-6">
-             <div className="flex-1 flex items-center gap-2 bg-slate-50 p-4 rounded-2xl border border-transparent focus-within:border-blue-500 transition-all shadow-inner">
-               <Search size={20} className="text-slate-300 ml-2"/><input value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Pesquisar aluno no Azure SQL..." className="bg-transparent outline-none w-full font-bold text-sm" />
-             </div>
+            <div className="flex-1 flex items-center gap-2 bg-slate-50 p-4 rounded-2xl border border-transparent focus-within:border-blue-500 transition-all shadow-inner">
+              <Search size={20} className="text-slate-300 ml-2" /><input value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Pesquisar aluno no Azure SQL..." className="bg-transparent outline-none w-full font-bold text-sm" />
+            </div>
           </div>
 
           <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100">
@@ -252,8 +261,8 @@ const App = () => {
                     <td className="px-8 py-6"><div className="font-bold text-slate-800 text-lg uppercase tracking-tight">{reg.name}</div><div className="text-[10px] text-slate-400 font-medium italic">{reg.cpf}</div></td>
                     <td className="px-8 py-6 text-center text-[10px] font-black uppercase">{projectDetails[reg.course]?.title || reg.course}</td>
                     <td className="px-8 py-6 text-center flex justify-center gap-3">
-                       <button className="p-3 bg-blue-50 text-blue-600 rounded-xl"><Eye size={18}/></button>
-                       <button className="p-3 bg-red-50 text-red-500 rounded-xl"><Trash2 size={18} /></button>
+                      <button className="p-3 bg-blue-50 text-blue-600 rounded-xl"><Eye size={18} /></button>
+                      <button className="p-3 bg-red-50 text-red-500 rounded-xl"><Trash2 size={18} /></button>
                     </td>
                   </tr>
                 ))}
@@ -304,7 +313,7 @@ const App = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 bg-white pt-24 px-8 lg:hidden animate-in slide-in-from-top duration-300 flex flex-col space-y-8 font-black text-3xl italic">
-          <button onClick={() => navigateTo('home')}>Início</button><button onClick={() => scrollToSection('about')}>Quem Somos</button><button onClick={() => scrollToSection('projects-grid')}>Projectos</button><button onClick={() => scrollToSection('contact')}>Contacto</button><button onClick={() => {setIsDonationModalOpen(true); setIsMenuOpen(false);}} className="w-full bg-orange-500 text-white py-6 rounded-[2rem] shadow-xl uppercase text-xl italic shadow-orange-100">Doe Agora PIX</button>
+          <button onClick={() => navigateTo('home')}>Início</button><button onClick={() => scrollToSection('about')}>Quem Somos</button><button onClick={() => scrollToSection('projects-grid')}>Projectos</button><button onClick={() => scrollToSection('contact')}>Contacto</button><button onClick={() => { setIsDonationModalOpen(true); setIsMenuOpen(false); }} className="w-full bg-orange-500 text-white py-6 rounded-[2rem] shadow-xl uppercase text-xl italic shadow-orange-100">Doe Agora PIX</button>
         </div>
       )}
 
@@ -339,23 +348,23 @@ const App = () => {
                 <p className="text-lg text-slate-600 mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed italic font-medium">Alfabetização e Informática Gratuita para quem mais precisa. Juntos, construímos um futuro com dignidade através do conhecimento compartilhado.</p>
                 <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
                   <button onClick={() => scrollToSection('projects-grid')} className="px-12 py-5 bg-slate-900 text-white rounded-[2rem] font-black shadow-xl shadow-slate-200 uppercase text-xs tracking-widest hover:bg-blue-600 transition-all hover:scale-105">Ver Projectos</button>
-                  <button onClick={() => navigateTo('registration')} className="px-12 py-5 border-4 border-orange-500 text-orange-500 rounded-[2rem] font-black hover:bg-orange-50 uppercase text-xs italic tracking-widest transition-all hover:scale-105">Fazer Matrícula <UserCircle size={18} className="inline ml-1"/></button>
+                  <button onClick={() => navigateTo('registration')} className="px-12 py-5 border-4 border-orange-500 text-orange-500 rounded-[2rem] font-black hover:bg-orange-50 uppercase text-xs italic tracking-widest transition-all hover:scale-105">Fazer Matrícula <UserCircle size={18} className="inline ml-1" /></button>
                 </div>
               </div>
-              <div className="aspect-square bg-orange-500 rounded-[6rem] shadow-2xl flex items-center justify-center text-white/10 hidden lg:flex transform -rotate-3 hover:rotate-0 duration-700 animate-in zoom-in duration-1000"><Heart size={200} className="fill-current"/></div>
+              <div className="aspect-square bg-orange-500 rounded-[6rem] shadow-2xl flex items-center justify-center text-white/10 hidden lg:flex transform -rotate-3 hover:rotate-0 duration-700 animate-in zoom-in duration-1000"><Heart size={200} className="fill-current" /></div>
             </section>
 
             {/* QUEM SOMOS */}
-            <section id="about" className="py-24 bg-white border-y border-slate-100 scroll-mt-20"><div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-20 items-center"><div className="bg-blue-600 rounded-[3rem] p-12 text-white shadow-2xl relative overflow-hidden group"><div className="relative z-10"><h3 className="text-3xl font-black mb-6 italic underline decoration-blue-400 decoration-4 underline-offset-8 text-white">Nossa História</h3><p className="leading-relaxed mb-6 opacity-90 text-lg">O **Instituto Alegria de Viver** nasceu da convicção de que o acesso à informação básica é um pilar da dignidade social.</p><p className="leading-relaxed opacity-90 text-lg italic font-medium">Hoje somos o coração tecnológico e educativo da nossa comunidade, garantindo aprendizado com afeto para todas as idades.</p></div><div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700"></div></div><div><div className="flex items-center gap-2 text-orange-600 font-black mb-6 uppercase tracking-widest text-[10px]"><Target size={16}/> Quem Somos</div><h2 className="text-4xl lg:text-5xl font-black mb-8 italic text-slate-800 leading-tight italic tracking-tight">Caminhos entre a <span className="text-blue-600 underline decoration-blue-100">tecnologia</span> e a <span className="text-orange-500">humanidade</span>.</h2><div className="space-y-6">{values.map((v, i) => (<div key={i} className="flex gap-6 p-6 rounded-[2rem] hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100 group shadow-sm"><div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0 group-hover:bg-orange-500 group-hover:text-white transition-all shadow-inner">{v.icon}</div><div><h4 className="font-bold text-xl mb-1 italic text-slate-800">{v.title}</h4><p className="text-slate-500 text-sm leading-relaxed font-medium">{v.description}</p></div></div>))}</div></div></div></section>
+            <section id="about" className="py-24 bg-white border-y border-slate-100 scroll-mt-20"><div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-20 items-center"><div className="bg-blue-600 rounded-[3rem] p-12 text-white shadow-2xl relative overflow-hidden group"><div className="relative z-10"><h3 className="text-3xl font-black mb-6 italic underline decoration-blue-400 decoration-4 underline-offset-8 text-white">Nossa História</h3><p className="leading-relaxed mb-6 opacity-90 text-lg">O **Instituto Alegria de Viver** nasceu da convicção de que o acesso à informação básica é um pilar da dignidade social.</p><p className="leading-relaxed opacity-90 text-lg italic font-medium">Hoje somos o coração tecnológico e educativo da nossa comunidade, garantindo aprendizado com afeto para todas as idades.</p></div><div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700"></div></div><div><div className="flex items-center gap-2 text-orange-600 font-black mb-6 uppercase tracking-widest text-[10px]"><Target size={16} /> Quem Somos</div><h2 className="text-4xl lg:text-5xl font-black mb-8 italic text-slate-800 leading-tight italic tracking-tight">Caminhos entre a <span className="text-blue-600 underline decoration-blue-100">tecnologia</span> e a <span className="text-orange-500">humanidade</span>.</h2><div className="space-y-6">{values.map((v, i) => (<div key={i} className="flex gap-6 p-6 rounded-[2rem] hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100 group shadow-sm"><div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0 group-hover:bg-orange-500 group-hover:text-white transition-all shadow-inner">{v.icon}</div><div><h4 className="font-bold text-xl mb-1 italic text-slate-800">{v.title}</h4><p className="text-slate-500 text-sm leading-relaxed font-medium">{v.description}</p></div></div>))}</div></div></div></section>
 
             {/* IMPACTO (PROJECTOS) */}
             <section id="projects-grid" className="py-24 bg-slate-50 scroll-mt-20"><div className="max-w-7xl mx-auto px-4 text-center"><h2 className="text-4xl lg:text-7xl font-black mb-20 italic tracking-tight">Eixos de <span className="text-orange-500 underline decoration-orange-200 decoration-4 underline-offset-8">Impacto</span></h2><div className="grid md:grid-cols-3 gap-10">{Object.entries(projectDetails).map(([id, p]) => (<div key={id} className="bg-white rounded-[4rem] transition-all hover:shadow-2xl hover:-translate-y-2 border border-slate-100 flex flex-col items-center group shadow-sm overflow-hidden pb-12"><div className="w-full h-64 overflow-hidden mb-8 relative"><img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" /><div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm p-3 rounded-2xl shadow-sm text-slate-800 italic font-black text-[10px] uppercase tracking-widest font-sans">{p.tag}</div></div><h3 className="text-3xl font-black mb-4 italic italic tracking-tight">{p.title}</h3><p className="text-slate-500 text-sm mb-10 px-8 leading-relaxed italic font-medium">{p.description}</p><button onClick={() => navigateTo(id)} className="w-3/4 bg-slate-900 text-white font-black py-5 rounded-[2rem] hover:bg-orange-500 transition-all uppercase text-[10px] italic tracking-widest shadow-lg">Ver Detalhes</button></div>))}</div></div></section>
 
             {/* DEPOIMENTOS */}
-            <section className="py-24 bg-white"><div className="max-w-7xl mx-auto px-4"><div className="text-center mb-16"><div className="flex items-center justify-center gap-2 text-green-600 font-black mb-4 uppercase tracking-widest text-[10px]"><Quote size={16}/> Depoimentos</div><h2 className="text-4xl lg:text-5xl font-black italic tracking-tighter text-slate-800">Histórias que nos <span className="text-green-600 underline decoration-green-100 underline-offset-8">inspiram</span></h2></div><div className="grid md:grid-cols-2 gap-10">{testimonials.map((t, i) => (<div key={i} className="bg-slate-50 p-10 rounded-[3.5rem] border border-slate-100 relative group transition-all hover:shadow-xl hover:bg-white shadow-sm shadow-slate-100 transition-all"><Quote className="text-slate-200 mb-6" size={50} /><p className="text-xl italic text-slate-600 leading-relaxed mb-8 font-medium italic">"{t.text}"</p><div className="flex items-center gap-4"><img src={t.image} alt={t.name} className="w-16 h-16 rounded-2xl object-cover shadow-md border-2 border-white" /><div><div className="font-black text-slate-800 italic">{t.name}</div><div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t.role}</div></div></div></div>))}</div></div></section>
+            <section className="py-24 bg-white"><div className="max-w-7xl mx-auto px-4"><div className="text-center mb-16"><div className="flex items-center justify-center gap-2 text-green-600 font-black mb-4 uppercase tracking-widest text-[10px]"><Quote size={16} /> Depoimentos</div><h2 className="text-4xl lg:text-5xl font-black italic tracking-tighter text-slate-800">Histórias que nos <span className="text-green-600 underline decoration-green-100 underline-offset-8">inspiram</span></h2></div><div className="grid md:grid-cols-2 gap-10">{testimonials.map((t, i) => (<div key={i} className="bg-slate-50 p-10 rounded-[3.5rem] border border-slate-100 relative group transition-all hover:shadow-xl hover:bg-white shadow-sm shadow-slate-100 transition-all"><Quote className="text-slate-200 mb-6" size={50} /><p className="text-xl italic text-slate-600 leading-relaxed mb-8 font-medium italic">"{t.text}"</p><div className="flex items-center gap-4"><img src={t.image} alt={t.name} className="w-16 h-16 rounded-2xl object-cover shadow-md border-2 border-white" /><div><div className="font-black text-slate-800 italic">{t.name}</div><div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{t.role}</div></div></div></div>))}</div></div></section>
 
             {/* CONTATO */}
-            <section id="contact" className="py-24 bg-white scroll-mt-20"><div className="max-w-7xl mx-auto px-4"><div className="bg-slate-50 rounded-[4rem] p-10 lg:p-20 border border-slate-100 grid lg:grid-cols-2 gap-20 shadow-inner relative overflow-hidden"><div className="relative z-10"><h2 className="text-4xl font-black italic mb-8">Fale <span className="text-orange-500 underline decoration-orange-100 decoration-4 underline-offset-8">Connosco</span></h2><p className="text-slate-600 text-lg italic mb-12 font-medium leading-relaxed">Dúvidas sobre turmas? Use o formulário ao lado. Sua mensagem irá para o Dashboard administrativo.</p><div className="space-y-10"><div className="flex items-center gap-6 group cursor-pointer"><div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-orange-500 shadow-sm transition-all"><Phone size={24}/></div><div><div className="text-[10px] font-black uppercase text-slate-400 italic">Telefone</div><span className="font-black text-slate-800 text-lg font-sans">(11) 99999-9999</span></div></div><div className="flex items-center gap-6 group cursor-pointer"><div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm transition-all"><Mail size={24}/></div><div><div className="text-[10px] font-black uppercase text-slate-400 italic">E-mail</div><span className="font-black text-slate-800 text-lg font-sans italic">contato@alegriadeviver.org</span></div></div></div></div><div className="bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100 relative z-10"><ContactFormComponent /></div></div></div></section>
+            <section id="contact" className="py-24 bg-white scroll-mt-20"><div className="max-w-7xl mx-auto px-4"><div className="bg-slate-50 rounded-[4rem] p-10 lg:p-20 border border-slate-100 grid lg:grid-cols-2 gap-20 shadow-inner relative overflow-hidden"><div className="relative z-10"><h2 className="text-4xl font-black italic mb-8">Fale <span className="text-orange-500 underline decoration-orange-100 decoration-4 underline-offset-8">Connosco</span></h2><p className="text-slate-600 text-lg italic mb-12 font-medium leading-relaxed">Dúvidas sobre turmas? Use o formulário ao lado. Sua mensagem irá para o Dashboard administrativo.</p><div className="space-y-10"><div className="flex items-center gap-6 group cursor-pointer"><div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-orange-500 shadow-sm transition-all"><Phone size={24} /></div><div><div className="text-[10px] font-black uppercase text-slate-400 italic">Telefone</div><span className="font-black text-slate-800 text-lg font-sans">(11) 99999-9999</span></div></div><div className="flex items-center gap-6 group cursor-pointer"><div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm transition-all"><Mail size={24} /></div><div><div className="text-[10px] font-black uppercase text-slate-400 italic">E-mail</div><span className="font-black text-slate-800 text-lg font-sans italic">contato@alegriadeviver.org</span></div></div></div></div><div className="bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100 relative z-10"><ContactFormComponent /></div></div></div></section>
           </div>
         )}
         {currentView === 'registration' && <RegistrationPageComponent />}
@@ -364,7 +373,7 @@ const App = () => {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-white border-t py-20 font-sans shadow-inner"><div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left"><div className="flex items-center gap-2 cursor-pointer transition-all hover:scale-105" onClick={() => navigateTo('home')}><div className="bg-orange-500 p-2 rounded-lg shadow-sm shadow-orange-100 shadow-sm"><Heart className="text-white w-5 h-5 fill-current" /></div><span className="text-xl font-black italic tracking-tighter text-slate-800 italic">Instituto <span className="text-orange-500 tracking-tighter italic">Alegria de Viver</span></span></div><p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] italic max-w-sm leading-relaxed">© 2024 Instituto Alegria de Viver • Matrícula Integrada com Azure SQL</p><div className="flex gap-4"><div className="p-4 bg-slate-50 rounded-2xl hover:text-orange-500 transition-all cursor-pointer shadow-sm hover:scale-110 shadow-slate-100 shadow-sm"><Instagram size={24}/></div><div className="p-4 bg-slate-50 rounded-2xl hover:text-blue-600 transition-all cursor-pointer shadow-sm hover:scale-110 shadow-slate-100 shadow-sm"><Facebook size={24}/></div></div></div></footer>
+      <footer className="bg-white border-t py-20 font-sans shadow-inner"><div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left"><div className="flex items-center gap-2 cursor-pointer transition-all hover:scale-105" onClick={() => navigateTo('home')}><div className="bg-orange-500 p-2 rounded-lg shadow-sm shadow-orange-100 shadow-sm"><Heart className="text-white w-5 h-5 fill-current" /></div><span className="text-xl font-black italic tracking-tighter text-slate-800 italic">Instituto <span className="text-orange-500 tracking-tighter italic">Alegria de Viver</span></span></div><p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] italic max-w-sm leading-relaxed">© 2024 Instituto Alegria de Viver • Matrícula Integrada com Azure SQL</p><div className="flex gap-4"><div className="p-4 bg-slate-50 rounded-2xl hover:text-orange-500 transition-all cursor-pointer shadow-sm hover:scale-110 shadow-slate-100 shadow-sm"><Instagram size={24} /></div><div className="p-4 bg-slate-50 rounded-2xl hover:text-blue-600 transition-all cursor-pointer shadow-sm hover:scale-110 shadow-slate-100 shadow-sm"><Facebook size={24} /></div></div></div></footer>
     </div>
   );
 };
