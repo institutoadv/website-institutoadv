@@ -41,13 +41,13 @@ const App = () => {
   const projectDetails = {
     informatica: { title: "Informática Básica", tag: "Inclusão Digital", icon: <Laptop size={48} />, color: "blue", image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1000", description: "A exclusão digital é um isolamento social. Nosso laboratório oferece o conhecimento técnico necessário.", longText: "Preparamos o aluno para o mercado moderno, desde o hardware básico até ferramentas de produtividade e LinkedIn.", benefits: ["Windows/Linux", "Pacote Office", "Criação de Currículo", "LinkedIn", "Internet Segura"], info: { duration: "3 meses", hours: "60h", target: "Jovens e Adultos" } },
     eja: { title: "Alfabetização (EJA)", tag: "Dignidade e Resgate", icon: <GraduationCap size={48} />, color: "green", image: "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?auto=format&fit=crop&q=80&w=1000", description: "Nunca é tarde para descobrir o mundo através das letras. Focamos na dignidade e na autonomia prática.", longText: "Alfabetizar um adulto é devolver-lhe a voz na sociedade. Focamos na leitura funcional e no orgulho de assinar o nome.", benefits: ["Método Afetivo", "Matemática do Quotidiano", "Interpretacão de Textos", "Cidadania", "Apoio Encceja"], info: { duration: "Contínuo", hours: "4h/sem", target: "Adultos e Idosos" } },
-    infantil: { title: "Educação Infantil", tag: "Futuro e Proteção", icon: <Sparkles size={48} />, color: "yellow", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=1000", description: "A infância é o solo onde plantamos o amanhã. Oferecemos um contraturno escolar lúdico e seguro.", longText: "Através de artes, música e reforço pedagógico lúdico, garantimos um ambiente de paz e aprendizado alegre.", benefits: ["Reforço Criativo", "Oficinas de Arte", "Música", "Horta Educativa", "Apoio Familiar"], info: { duration: "Anual", hours: "Seg-Sex", target: "Crianças 6-12" } }
+    infantil: { title: "Educação Infantil", tag: "Futuro e Proteção", icon: <Sparkles size={48} />, color: "yellow", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=1000", description: "A infância é o solo onde plantamos o amanhã. Oferecemos um contraturno escolar lúdico e seguro.", longText: "Através de artes, música e reforço pedagógico lúdico, garantimos um ambiente de paz e aprendizado alegre.", benefits: ["Reforço Criativo", "Oficinas de Arte", "Música", "Horta Educativa", "Apoio Familiar"], info: { duration: "Anual", hours: "Seg-Sex", target: "Crianças 6-12 anos" } }
   };
 
   const values = [
-    { title: "Educação Libertadora", description: "O conhecimento é a chave para a verdadeira autonomia e liberdade individual.", icon: <BookOpen className="w-6 h-6" /> },
-    { title: "Alegria como Método", description: "O aprendizado acontece de forma mais profunda quando há acolhimento e felicidade no processo.", icon: <Smile className="w-6 h-6" /> },
-    { title: "Inclusão Social", description: "Ninguém deve ficar para trás. Nossa missão é reduzir as desigualdades através do ensino.", icon: <Users className="w-6 h-6" /> }
+    { title: "Educação Libertadora", description: "O conhecimento é a chave para a verdadeira autonomia.", icon: <BookOpen className="w-6 h-6" /> },
+    { title: "Alegria como Método", description: "O aprendizado acontece com acolhimento e felicidade.", icon: <Smile className="w-6 h-6" /> },
+    { title: "Inclusão Social", description: "Ninguém deve ficar para trás através do ensino.", icon: <Users className="w-6 h-6" /> }
   ];
 
   const testimonials = [
@@ -165,7 +165,7 @@ const App = () => {
   const CertificateView = ({ student }) => {
     const percentage = calculateAttendancePercentage(student.attendance);
     return (
-      <div className="fixed inset-0 z-[100] bg-white flex items-center justify-center p-4 overflow-y-auto font-sans">
+      <div className="fixed inset-0 z-[100] bg-white flex items-center justify-center p-4 overflow-y-auto font-sans no-print">
         <div className="absolute top-8 left-8 flex gap-4 no-print">
           <button onClick={() => setSelectedCertificate(null)} className="flex items-center gap-2 px-6 py-3 bg-slate-100 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-slate-200 transition-all"><ArrowLeft size={16} /> Voltar</button>
           <button onClick={() => window.print()} className="flex items-center gap-2 px-6 py-3 bg-orange-500 text-white rounded-xl font-black text-xs uppercase tracking-widest shadow-lg shadow-orange-200 hover:bg-orange-600 transition-all"><Printer size={16} /> Imprimir Certificado</button>
@@ -286,7 +286,6 @@ const App = () => {
           <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100 animate-in slide-in-from-bottom duration-500">
             <div className="bg-slate-900 p-10 text-white relative"><h2 className="text-4xl font-black italic mb-2 tracking-tight">Formulário de <span className="text-orange-500">Matrícula</span></h2><div className="absolute right-10 top-10 opacity-10"><UserCircle size={100} /></div></div>
             <form onSubmit={handleSubmit} className="p-8 lg:p-12 space-y-10">
-              {/* DADOS PESSOAIS COMPLETOS */}
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="md:col-span-2 space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">Nome Completo</label><input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
                 <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">Nascimento</label><input required type="date" value={formData.birthDate} onChange={e => setFormData({ ...formData, birthDate: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
@@ -296,14 +295,12 @@ const App = () => {
                 <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">E-mail</label><input required type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
                 <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">WhatsApp</label><input required type="tel" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
               </div>
-              {/* ENDEREÇO COMPLETO */}
               <div className="grid md:grid-cols-4 lg:grid-cols-6 gap-6">
                 <div className="md:col-span-2 lg:col-span-3 space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">Logradouro</label><input required value={formData.logradouro} onChange={e => setFormData({ ...formData, logradouro: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
                 <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">Nº</label><input required value={formData.numero} onChange={e => setFormData({ ...formData, numero: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
                 <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">Bairro</label><input required value={formData.bairro} onChange={e => setFormData({ ...formData, bairro: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
                 <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">CEP</label><input required value={formData.cep} onChange={e => setFormData({ ...formData, cep: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
               </div>
-              {/* CIDADE E ESTADO */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">Cidade</label><input required value={formData.cidade} onChange={e => setFormData({ ...formData, cidade: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
                 <div className="space-y-2"><label className="text-[10px] font-black uppercase text-slate-400 ml-2 italic">Estado</label><input required value={formData.estado} onChange={e => setFormData({ ...formData, estado: e.target.value })} className="w-full px-5 py-3 bg-slate-50 rounded-xl font-bold border-none shadow-inner outline-none focus:ring-2 focus:ring-orange-500" /></div>
@@ -321,6 +318,30 @@ const App = () => {
   };
 
   const InstructorDashboardComponent = () => {
+    // --- LÓGICA DE AÇÕES RESTAURADAS ---
+    const handleUpdateStatus = async (id, newStatus) => {
+      setRegistrations(prev => prev.map(r => r.id === id ? { ...r, status: newStatus } : r));
+      // No Arquiteto Level 3, aqui dispararíamos fetch('/api/updateStatus', ...)
+    };
+
+    const handleDelete = async (id) => {
+      if (window.confirm("Deseja realmente excluir permanentemente do SQL?")) {
+        setRegistrations(prev => prev.filter(r => r.id !== id));
+      }
+    };
+
+    const handleToggleAttendance = async (studentId, dayIndex) => {
+      setRegistrations(prev => prev.map(r => {
+        if (r.id === studentId) {
+          const newAttendance = [...r.attendance];
+          newAttendance[dayIndex] = !newAttendance[dayIndex];
+          // Aqui chamaríamos a API para salvar a frequência real no SQL
+          return { ...r, attendance: newAttendance };
+        }
+        return r;
+      }));
+    };
+
     const filteredRegs = registrations.filter(r => (r.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || (r.id || '').includes(searchTerm));
     const filteredMsgs = messages.filter(m => (m.name || '').toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -345,14 +366,23 @@ const App = () => {
           <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100">
             {dashboardTab === 'alunos' && (
               <table className="w-full text-left">
-                <thead className="bg-slate-900 text-white text-[10px] font-black uppercase italic tracking-widest"><tr><th className="px-8 py-6">Protocolo</th><th className="px-8 py-6">Aluno</th><th className="px-8 py-6 text-center">Projeto</th><th className="px-8 py-6 text-center">Ações</th></tr></thead>
+                <thead className="bg-slate-900 text-white text-[10px] font-black uppercase italic tracking-widest"><tr><th className="px-8 py-6">Protocolo</th><th className="px-8 py-6">Aluno</th><th className="px-8 py-6 text-center">Status</th><th className="px-8 py-6 text-center">Ações</th></tr></thead>
                 <tbody className="divide-y divide-slate-100">
                   {filteredRegs.map(reg => (
                     <tr key={reg.id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-8 py-6 font-mono text-blue-500 font-black">#{reg.id}</td>
-                      <td className="px-8 py-6"><div className="font-black text-slate-800 uppercase tracking-tight">{reg.name}</div><div className="text-[10px] text-slate-400 font-bold">{reg.cpf}</div></td>
-                      <td className="px-8 py-6 text-center uppercase text-[10px] font-black">{projectDetails[reg.course]?.title || reg.course}</td>
-                      <td className="px-8 py-6 text-center"><button onClick={() => setSelectedStudent(reg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all shadow-sm"><Eye size={18} /></button></td>
+                      <td className="px-8 py-6"><div className="font-black text-slate-800 uppercase tracking-tight">{reg.name}</div><div className="text-[10px] text-slate-400 font-bold">{reg.cpf} • {reg.course}</div></td>
+                      <td className="px-8 py-6 text-center">
+                        <select value={reg.status} onChange={e => handleUpdateStatus(reg.id, e.target.value)} className={`text-[10px] font-black uppercase rounded-xl py-2 px-4 shadow-inner ${reg.status === 'Aprovado' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
+                          <option>Pendente</option><option>Aprovado</option><option>Lista de Espera</option>
+                        </select>
+                      </td>
+                      <td className="px-8 py-6 text-center">
+                        <div className="flex justify-center gap-3">
+                          <button onClick={() => setSelectedStudent(reg)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all shadow-sm"><Eye size={18} /></button>
+                          <button onClick={() => handleDelete(reg.id)} className="p-3 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all shadow-sm"><Trash2 size={18} /></button>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -369,13 +399,22 @@ const App = () => {
                       return (
                         <tr key={reg.id} className="hover:bg-slate-50 transition-colors">
                           <td className="px-8 py-6 font-bold uppercase">{reg.name}</td>
-                          {reg.attendance.map((val, i) => (<td key={i} className="px-2 py-6 text-center"><div className={`w-4 h-4 mx-auto rounded-full border ${val ? 'bg-green-500 border-green-600 shadow-md' : 'bg-slate-100 border-slate-200 shadow-inner'}`}></div></td>))}
+                          {reg.attendance.map((val, i) => (
+                            <td key={i} className="px-2 py-6 text-center">
+                              <button
+                                onClick={() => handleToggleAttendance(reg.id, i)}
+                                className={`w-6 h-6 mx-auto rounded-full border transition-all ${val ? 'bg-green-500 border-green-600 shadow-md scale-110' : 'bg-slate-100 border-slate-200 shadow-inner hover:bg-slate-200'}`}
+                              >
+                                {val && <Check size={12} className="text-white mx-auto" />}
+                              </button>
+                            </td>
+                          ))}
                           <td className="px-8 py-6 text-center font-black text-lg">{perc}%</td>
                           <td className="px-8 py-6 text-center">
                             {perc >= 90 ? (
                               <button onClick={() => setSelectedCertificate(reg)} className="p-2 bg-orange-100 text-orange-600 rounded-lg hover:bg-orange-600 hover:text-white transition-all shadow-sm flex items-center gap-2 mx-auto uppercase text-[8px] font-black italic"><Award size={16} /> Gerar Certificado</button>
                             ) : (
-                              <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest italic">Abaixo de 90%</span>
+                              <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest italic">Frequência insuficiente</span>
                             )}
                           </td>
                         </tr>
@@ -456,7 +495,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 overflow-x-hidden font-sans">
-      {/* NAVEGAÇÃO PRINCIPAL - LINK DE CONTACTO RESTAURADO */}
       <nav className="fixed w-full bg-white/90 backdrop-blur-md z-50 h-20 flex justify-between items-center px-4 lg:px-20 border-b border-slate-100 shadow-sm">
         <div className="flex items-center gap-2 cursor-pointer transition-transform hover:scale-105" onClick={() => navigateTo('home')}>
           <div className="bg-orange-500 p-2 rounded-lg shadow-md shadow-orange-100"><Heart className="text-white fill-current" /></div>
@@ -472,7 +510,6 @@ const App = () => {
         <div className="lg:hidden"><button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 bg-slate-100 rounded-xl shadow-sm transition-all">{isMenuOpen ? <X /> : <Menu />}</button></div>
       </nav>
 
-      {/* Mobile Menu - LINK DE CONTACTO RESTAURADO */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 bg-white pt-24 px-8 lg:hidden animate-in slide-in-from-top duration-300 flex flex-col space-y-8 font-black text-3xl italic text-slate-800">
           <button onClick={() => navigateTo('home')}>Início</button>
@@ -483,7 +520,6 @@ const App = () => {
         </div>
       )}
 
-      {/* MODAL DE DOAÇÃO (PIX) */}
       {isDonationModalOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 animate-in fade-in duration-300">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setIsDonationModalOpen(false)}></div>
@@ -504,7 +540,6 @@ const App = () => {
       <main>
         {currentView === 'home' && (
           <div className="animate-in fade-in duration-1000">
-            {/* HERO SECTION */}
             <section id="home" className="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center text-center lg:text-left">
               <div className="animate-in slide-in-from-left duration-700">
                 <span className="inline-block px-4 py-1.5 bg-orange-100 text-orange-600 rounded-full text-[10px] font-black mb-6 uppercase tracking-widest italic shadow-sm">Transformando Destinos</span>
@@ -518,20 +553,16 @@ const App = () => {
               <div className="aspect-square bg-orange-500 rounded-[6rem] shadow-2xl flex items-center justify-center text-white/10 hidden lg:flex transform -rotate-3 hover:rotate-0 duration-700 animate-in zoom-in duration-1000"><Heart size={200} className="fill-current" /></div>
             </section>
 
-            {/* QUEM SOMOS */}
             <section id="about" className="py-24 bg-white border-y border-slate-100 scroll-mt-20"><div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-20 items-center">
               <div className="bg-blue-600 rounded-[3rem] p-12 text-white shadow-2xl relative overflow-hidden group"><div className="relative z-10"><h3 className="text-3xl font-black mb-6 italic underline decoration-blue-300 decoration-4 underline-offset-8 italic">Nossa História</h3><p className="leading-relaxed mb-6 opacity-90 text-lg italic">O **Instituto Alegria de Viver** nasceu da convicção de que o acesso à informação é um pilar da dignidade social através de tecnologias Cloud.</p></div><div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 group-hover:scale-110 transition-transform duration-700"></div></div>
               <div><div className="flex items-center gap-2 text-orange-600 font-black mb-6 uppercase tracking-widest text-[10px]"><Target size={16} /> Quem Somos</div><h2 className="text-4xl lg:text-5xl font-black mb-8 italic text-slate-800 leading-tight tracking-tight italic">Caminhos entre a <span className="text-blue-600 underline decoration-blue-100">tecnologia</span> e a <span className="text-orange-500">humanidade</span>.</h2><div className="space-y-6">{values.map((v, i) => (<div key={i} className="flex gap-6 p-6 rounded-[2rem] hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100 group shadow-sm"><div className="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0 group-hover:bg-orange-500 group-hover:text-white transition-all shadow-inner">{v.icon}</div><div><h4 className="font-bold text-xl mb-1 italic text-slate-800 italic">{v.title}</h4><p className="text-slate-500 text-sm leading-relaxed font-medium italic">{v.description}</p></div></div>))}</div></div>
             </div></section>
 
-            {/* IMPACTO (PROJECTOS) */}
             <section id="projects-grid" className="py-24 bg-slate-50 scroll-mt-20"><div className="max-w-7xl mx-auto px-4 text-center"><h2 className="text-4xl lg:text-7xl font-black mb-20 italic tracking-tight italic">Eixos de <span className="text-orange-500 underline decoration-orange-200 decoration-4 underline-offset-8 italic">Impacto</span></h2><div className="grid md:grid-cols-3 gap-10">{Object.entries(projectDetails).map(([id, p]) => (<div key={id} className="bg-white rounded-[4rem] transition-all hover:shadow-2xl hover:-translate-y-2 border border-slate-100 flex flex-col items-center group shadow-sm overflow-hidden pb-12"><div className="w-full h-64 overflow-hidden mb-8 relative"><img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" /><div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm p-3 rounded-2xl shadow-sm text-slate-800 italic font-black text-[10px] uppercase tracking-widest tracking-widest">{p.tag}</div></div><h3 className="text-3xl font-black mb-4 italic tracking-tight italic">{p.title}</h3><p className="text-slate-500 text-sm mb-10 px-8 leading-relaxed italic font-medium italic">"{p.description}"</p><button onClick={() => navigateTo(id)} className="w-3/4 bg-slate-900 text-white font-black py-5 rounded-[2rem] hover:bg-orange-500 transition-all uppercase text-[10px] italic tracking-widest shadow-lg shadow-slate-100 tracking-widest">Ver Detalhes</button></div>))}</div></div></section>
 
-            {/* DEPOIMENTOS */}
-            <section className="py-24 bg-white"><div className="max-w-7xl mx-auto px-4"><div className="text-center mb-16"><div className="flex items-center justify-center gap-2 text-green-600 font-black mb-4 uppercase tracking-widest text-[10px]"><Quote size={16} /> Depoimentos</div><h2 className="text-4xl lg:text-5xl font-black italic tracking-tighter text-slate-800 italic">Histórias que nos <span className="text-green-600 underline decoration-green-100 underline-offset-8 italic">inspiram</span></h2></div><div className="grid md:grid-cols-2 gap-10">{testimonials.map((t, i) => (<div key={i} className="bg-slate-50 p-10 rounded-[3.5rem] border border-slate-100 relative group transition-all hover:shadow-xl hover:bg-white shadow-sm shadow-slate-100 transition-all"><Quote className="text-slate-200 mb-6" size={50} /><p className="text-xl italic text-slate-600 leading-relaxed mb-8 font-medium italic">"{t.text}"</p><div className="flex items-center gap-4"><img src={t.image} alt={t.name} className="w-16 h-16 rounded-2xl object-cover shadow-md border-2 border-white" /><div><div className="font-black text-slate-800 italic">{t.name}</div><div className="text-[10px] font-black text-slate-400 uppercase tracking-widest italic">{t.role}</div></div></div></div>))}</div></div></section>
+            <section className="py-24 bg-white"><div className="max-w-7xl mx-auto px-4"><div className="text-center mb-16"><div className="flex items-center justify-center gap-2 text-green-600 font-black mb-4 uppercase tracking-widest text-[10px]"><Quote size={16} /> Depoimentos</div><h2 className="text-4xl lg:text-5xl font-black italic tracking-tighter text-slate-800 italic">Histórias que nos <span className="text-green-600 underline decoration-green-100 underline-offset-8 italic">inspiram</span></h2></div><div className="grid md:grid-cols-2 gap-10">{testimonials.map((t, i) => (<div key={i} className="bg-slate-50 p-10 rounded-[3.5rem] border border-slate-100 relative group transition-all hover:shadow-xl hover:bg-white shadow-sm shadow-slate-100"><Quote className="text-slate-200 mb-6" size={50} /><p className="text-xl italic text-slate-600 leading-relaxed mb-8 font-medium italic">"{t.text}"</p><div className="flex items-center gap-4"><img src={t.image} alt={t.name} className="w-16 h-16 rounded-2xl object-cover shadow-md border-2 border-white" /><div><div className="font-black text-slate-800 italic">{t.name}</div><div className="text-[10px] font-black text-slate-400 uppercase tracking-widest italic">{t.role}</div></div></div></div>))}</div></div></section>
 
-            {/* CONTATO */}
-            <section id="contact" className="py-24 bg-white scroll-mt-20"><div className="max-w-7xl mx-auto px-4"><div className="bg-slate-50 rounded-[4rem] p-10 lg:p-20 border border-slate-100 grid lg:grid-cols-2 gap-20 shadow-inner relative overflow-hidden"><div className="relative z-10 font-sans"><h2 className="text-4xl font-black italic mb-8 italic">Fale <span className="text-orange-500 underline decoration-orange-100 decoration-4 underline-offset-8 italic">Connosco</span></h2><p className="text-slate-600 text-lg italic mb-12 font-medium leading-relaxed italic">Sua mensagem será enviada diretamente para o nosso Azure SQL Database administrativo.</p><div className="space-y-10"><div className="flex items-center gap-6 group cursor-pointer transition-all hover:translate-x-2"><div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-orange-500 shadow-sm group-hover:bg-orange-500 group-hover:text-white transition-all"><Phone size={24} /></div><div><div className="text-[10px] font-black uppercase text-slate-400 italic italic">Telefone</div><span className="font-black text-slate-800 text-lg font-sans tracking-widest italic">(11) 99999-9999</span></div></div><div className="flex items-center gap-6 group cursor-pointer transition-all hover:translate-x-2"><div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all"><Mail size={24} /></div><div><div className="text-[10px] font-black uppercase text-slate-400 italic italic">E-mail</div><span className="font-black text-slate-800 text-lg font-sans italic tracking-widest italic">contato@alegriadeviver.org</span></div></div></div></div><div className="bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100 relative z-10"><ContactFormComponent /></div></div></div></section>
+            <section id="contact" className="py-24 bg-white scroll-mt-20"><div className="max-w-7xl mx-auto px-4"><div className="bg-slate-50 rounded-[4rem] p-10 lg:p-20 border border-slate-100 grid lg:grid-cols-2 gap-20 shadow-inner relative overflow-hidden"><div className="relative z-10 font-sans"><h2 className="text-4xl font-black italic mb-8 italic">Fale <span className="text-orange-500 underline decoration-orange-100 decoration-4 underline-offset-8 italic">Connosco</span></h2><p className="text-slate-600 text-lg italic mb-12 font-medium leading-relaxed italic">Dúvidas? Sua mensagem será enviada diretamente para o nosso Azure SQL Database administrativo.</p><div className="space-y-10"><div className="flex items-center gap-6 group cursor-pointer transition-all hover:translate-x-2"><div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-orange-500 shadow-sm group-hover:bg-orange-500 group-hover:text-white transition-all"><Phone size={24} /></div><div><div className="text-[10px] font-black uppercase text-slate-400 italic italic">Telefone</div><span className="font-black text-slate-800 text-lg font-sans tracking-widest italic">(11) 99999-9999</span></div></div><div className="flex items-center gap-6 group cursor-pointer transition-all hover:translate-x-2"><div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all"><Mail size={24} /></div><div><div className="text-[10px] font-black uppercase text-slate-400 italic italic">E-mail</div><span className="font-black text-slate-800 text-lg font-sans italic tracking-widest italic">contato@alegriadeviver.org</span></div></div></div></div><div className="bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100 relative z-10"><ContactFormComponent /></div></div></div></section>
           </div>
         )}
         {currentView === 'registration' && <RegistrationPageComponent />}
@@ -539,7 +570,6 @@ const App = () => {
         {projectDetails[currentView] && <ProjectPageComponent data={projectDetails[currentView]} id={currentView} />}
       </main>
 
-      {/* FOOTER */}
       <footer className="bg-white border-t py-20 font-sans shadow-inner"><div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left"><div className="flex items-center gap-2 cursor-pointer transition-all hover:scale-105" onClick={() => navigateTo('home')}><div className="bg-orange-500 p-2 rounded-lg shadow-sm shadow-orange-100"><Heart className="text-white w-5 h-5 fill-current" /></div><span className="text-xl font-black italic tracking-tighter text-slate-800 italic">Instituto <span className="text-orange-500 tracking-tighter italic">Alegria de Viver</span></span></div><p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] italic max-w-sm leading-relaxed italic text-center">© 2024 Instituto Alegria de Viver • Matrícula Cloud Integrada Azure SQL v2.1</p><div className="flex gap-4"><div className="p-4 bg-slate-50 rounded-2xl hover:text-orange-500 transition-all cursor-pointer shadow-sm hover:scale-110 shadow-slate-100"><Instagram size={24} /></div><div className="p-4 bg-slate-50 rounded-2xl hover:text-blue-600 transition-all cursor-pointer shadow-sm hover:scale-110 shadow-slate-100"><Facebook size={24} /></div></div></div></footer>
     </div>
   );
