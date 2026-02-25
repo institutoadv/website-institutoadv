@@ -424,12 +424,13 @@ const App = () => {
                 <tbody className="divide-y divide-slate-100 font-sans">
                   {filteredRegs.map(reg => {
                     const perc = calculateAttendancePercentage(reg.attendance);
+                    const presences = reg.attendance?.filter(v => v).length || 0;
                     return (
                       <tr key={reg.id} className="hover:bg-slate-50 transition-colors">
                         <td className="px-8 py-6 font-bold">{reg.name}</td>
                         {reg.attendance.map((val, i) => (<td key={i} className="px-2 py-6 text-center"><div className={`w-6 h-6 mx-auto rounded-full ${val ? 'bg-green-500' : 'bg-slate-100'}`}></div></td>))}
                         <td className="px-8 py-6 text-center font-black">{perc}%</td>
-                        <td className="px-8 py-6 text-center">{perc >= 90 && <button onClick={() => setSelectedCertificate(reg)} className="p-2 bg-orange-100 text-orange-600 rounded-lg hover:bg-orange-600 hover:text-white transition-all"><Award size={18} /></button>}</td>
+                        <td className="px-8 py-6 text-center">{presences >= 9 && <button onClick={() => setSelectedCertificate(reg)} className="p-2 bg-orange-100 text-orange-600 rounded-lg hover:bg-orange-600 hover:text-white transition-all"><Award size={18} /></button>}</td>
                       </tr>
                     );
                   })}
