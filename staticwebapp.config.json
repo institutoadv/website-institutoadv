@@ -1,12 +1,5 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html"
-  },
-  "routes": [
-    {
-      "route": "/admin-portal-adv",
-      "methods": ["GET"],
-      "rewrite": "/index.html"
-    }
-  ]
+  }
 }

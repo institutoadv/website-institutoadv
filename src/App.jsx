@@ -13,7 +13,7 @@ import {
 
 const TIME_SLOTS = ["09:00", "11:00", "14:00", "16:00"];
 const MONTHS = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-const PIX_KEY = "00.000.000/0001-00";
+const PIX_KEY = "03.653.346/0001-87";
 
 const App = () => {
   const [currentView, setCurrentView] = useState('home');
@@ -53,21 +53,20 @@ const App = () => {
 
   // --- LOGICA DE INTEGRACAO AZURE ---
   useEffect(() => {
-    // Monitora a URL secreta
     const path = window.location.pathname;
-
-    // Log para debug (aparecerá no F12 do navegador)
     console.log("Caminho detectado:", path);
-    if (path === '/admin-portal-adv') {
+
+
+    if (path === '/dashboard') {
       setCurrentView('dashboard');
-    } else {
-      // Garante que se não for a URL secreta, ele caia na home
-      setCurrentView('home');
     }
+    else
+      if (path === '/' || path === '/index.html') {
+        setCurrentView('home');
+      }
   }, []);
 
   useEffect(() => {
-
     const loadFromSQL = async () => {
       try {
         const response = await fetch('/api/getRegistrations');
