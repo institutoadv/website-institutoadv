@@ -110,14 +110,30 @@ const App = () => {
         const response = await fetch('/api/getRegistrations');
         if (response.ok) {
           const data = await response.json();
-          // Converte attendance string em array se necessário
-          const parsedData = data.map(reg => ({
-            ...reg,
-            attendance: typeof reg.attendance === 'string' ? JSON.parse(reg.attendance) : (reg.attendance || Array(10).fill(false))
+          // NORMALIZAÇÃO: Converte chaves SQL (Nome) para chaves JS (name)
+          const normalized = data.map(item => ({
+            id: item.ID || item.id,
+            name: item.Name || item.name,
+            cpf: item.CPF || item.cpf,
+            course: item.Course || item.course,
+            status: item.Status || item.status || 'Pendente',
+            attendance: item.Attendance ? (typeof item.Attendance === 'string' ? JSON.parse(item.Attendance) : item.Attendance) : Array(10).fill(false),
+            birthDate: item.BirthDate || item.birthDate,
+            phone: item.Phone || item.phone,
+            escolaridade: item.Escolaridade || item.escolaridade,
+            logradouro: item.Logradouro || item.logradouro,
+            numero: item.Numero || item.numero,
+            bairro: item.Bairro || item.bairro,
+            cidade: item.Cidade || item.cidade || 'São Paulo',
+            estado: item.Estado || item.estado || 'SP',
+            cep: item.CEP || item.cep,
+            time: item.TimeSlot || item.time || '09:00',
+            turma: item.Turma || item.turma,
+            createdAt: item.CreatedAt || item.createdAt
           }));
-          setRegistrations(parsedData);
+          setRegistrations(normalized);
         }
-      } catch (err) { console.error("Erro ao carregar do Azure SQL", err); }
+      } catch (err) { console.error("Erro no GET Azure SQL", err); }
     };
     if (isAdmin) loadFromSQL();
   }, [isAdmin]);
